@@ -1,0 +1,27 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd (12,11,5,4,3,2);
+String CONTRASENA;
+void setup() {
+  lcd.begin(16,2);
+  Serial.begin(9600);
+  Serial.println("Ingresar La Contraseña");
+  lcd.clear();
+}
+
+void loop() {
+  if(Serial.available()>0){
+    CONTRASENA = Serial.readString();
+    Serial.print(" Recibido: "); Serial.println("*");
+    lcd.setCursor(0,0); 
+    if(CONTRASENA.equals("andres"))
+    {
+      lcd.clear();
+      lcd.print("CLAVE CORRECTA");
+    }
+    else
+    {
+      lcd.clear();
+      lcd.print("CLAVE INCORRECTA");
+    }
+  }
+}
